@@ -14,8 +14,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class Sched extends _react.default.Component {
-  constructor(props) {
-    super(props);
+  constructor(_props) {
+    super(_props);
+
+    _defineProperty(this, "componentDidUpdate", prev => {
+      if (prev !== this.data) {
+        this.setState({
+          heading: props.data.heading,
+          schedule: this.parse()
+        });
+      }
+    });
+
+    _defineProperty(this, "parse", () => {
+      let bench = [];
+
+      for (const i in this.data) {
+        if (i !== 'heading') {
+          let time = i.split('-');
+          bench.push( /*#__PURE__*/_react.default.createElement(_bmdAppt.default, {
+            key: i,
+            start: time[0],
+            end: time[1],
+            desc: this.data[i]
+          }));
+        }
+      }
+
+      return bench;
+    });
 
     _defineProperty(this, "render", () => {
       return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, this.state.heading), /*#__PURE__*/_react.default.createElement("div", {
@@ -23,24 +50,10 @@ class Sched extends _react.default.Component {
       }, this.state.schedule));
     });
 
-    this.data = props.data;
-    let bench = [];
-
-    for (const i in this.data) {
-      if (i !== 'heading') {
-        let time = i.split('-');
-        bench.push( /*#__PURE__*/_react.default.createElement(_bmdAppt.default, {
-          key: i,
-          start: time[0],
-          end: time[1],
-          desc: this.data[i]
-        }));
-      }
-    }
-
+    this.data = _props.data;
     this.state = {
-      heading: props.data.heading,
-      schedule: bench
+      heading: _props.data.heading,
+      schedule: this.parse()
     };
   }
 

@@ -7,7 +7,8 @@
     "test": "npx jest",
     "rapid": "npx webpack -w & nodemon test/index.js",
     "start": "nodemon test/index.js",
-    "tran": "babel src -d dist --copy-files"
+    "tran": "babel src -d dist --copy-files",
+    "ship": "npx webpack && npm run tran && npm pack && mv $npm_package_name-$npm_package_version.tgz ../toolbin"
   },
   "author": "Deke Domino",
   "license": "ISC",
@@ -30,7 +31,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "bmd-appt": "git+https://github.com/DeCorben/bmd-appt.git",
+    "bmd-appt": "file:../toolbin/bmd-appt-1.0.0.tgz",
     "react": "^16.13.1"
   }
 }
