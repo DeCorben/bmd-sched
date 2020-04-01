@@ -1,0 +1,6 @@
+.gitattributes
+dist/index.html
+dist/main.js
+test/
+src/
+*.config.*
