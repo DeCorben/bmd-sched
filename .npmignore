@@ -4,3 +4,4 @@ dist/main.js
 test/
 src/
 *.config.*
+*.tgz

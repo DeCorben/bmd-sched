@@ -4,26 +4,27 @@ import Appt from 'bmd-appt'
 export default class Sched extends React.Component{
     constructor(props){
         super(props)
-        this.data = props.data
+        //this.data = props.data
         this.state = {
             heading: props.data.heading,
             schedule: this.parse()
         }
     }
     componentDidUpdate = (prev)=>{
-        if(prev !== this.data){
+        if(prev !== this.props){
+            console.log("here")
             this.setState({
-                heading: props.data.heading,
+                heading: this.props.data.heading,
                 schedule: this.parse()
             })
         }
     }
     parse = ()=>{
         let bench = []
-        for(const i in this.data){
+        for(const i in this.props.data){
             if(i !=='heading'){
                 let time = i.split('-')
-                bench.push(<Appt key={i} start={time[0]} end={time[1]} desc={this.data[i]}/>)
+                bench.push(<Appt key={i} start={time[0]} end={time[1]} desc={this.props.data[i]}/>)
             }
         }
         return bench

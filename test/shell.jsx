@@ -3,19 +3,35 @@ import ReactDOM from 'react-dom'
 import Sched from '../src/index.jsx'
 import axios from 'axios'
 
-axios.post('/api/fetch',{fileName:'billboard.json'})
-    .then((res)=>{
-        ReactDOM.render(
-            <div>
-                <Sched data={res.data}/>
+//need to try updating when part of another component and data is not
+    //synchronous
+class Stub extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            data: {
+                heading: "Dummy",
+                "9:99-9:99": "something"
+            }
+        }
+        axios.post('/api/fetch',{fileName:'billboard.json'})
+        .then((res)=>{
+            this.setState({
+                data: res.data
+            })
+        })
+        .catch((err)=>{
+            console.log(`API Error: ${err}`)
+        })
+    }
+    render = ()=>{
+        return (<div><Sched data={this.state.data}/></div>)
+    }
+}
+
+ReactDOM.render(
+            <div className="questionable">
+                <Stub/>
             </div>,
             document.getElementById('root')
         )
-    })
-    .catch((err)=>{
-        console.log(`API Error: ${err}`)
-        ReactDOM.render(
-            <div>666:Crash</div>
-        )
-    })
-
