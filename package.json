@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "bmd-appt": "file:../bmd-appt/bmd-appt-1.0.0.tgz",
+    "bmd-appt": "git+https://github.com/DeCorben/bmd-appt.git",
     "react": "^16.13.1"
   }
 }
