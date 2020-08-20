@@ -4,7 +4,6 @@ import Appt from 'bmd-appt'
 export default class Sched extends React.Component{
     constructor(props){
         super(props)
-        //this.data = props.data
         this.state = {
             heading: props.data.heading,
             schedule: this.parse()
